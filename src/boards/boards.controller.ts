@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common'
+import { Body, Controller, Get, Post } from '@nestjs/common'
 import { BoardsService } from './boards.service'
+import { Board } from './boards.model'
 
 @Controller('boards')
 export class BoardsController {
@@ -7,5 +8,10 @@ export class BoardsController {
   @Get('/')
   callGetAllBoards() {
     return this.boardsService.getAllBoards()
+  }
+
+  @Post()
+  callCreateBoards(@Body('title') title: string, @Body('description') description: string): Board {
+    return this.boardsService.createBoard(title, description)
   }
 }
